@@ -20,8 +20,8 @@
       </thead>
       <tbody>
         <tr ng-repeat="item in inventory.inventory">
-          <td>{{item.name}}</td>
-          <td>{{(item.price + (item.price * inventory.tax) - item.discount) | number: 2 | currency}}
+          <td>{{item.captilizedName()}}</td>
+          <td>{{item.fullPriceWithTax(inventory.tax) | number: 2 | currency}}
             <img ng-show="item.discount > 0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png" alt="sale icon" /></td>
           <td>{{item.quantity}}</td>
           <td>{{item.color}}</td>

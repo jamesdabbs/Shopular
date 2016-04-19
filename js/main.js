@@ -3,7 +3,26 @@
 
   var salesTax = 0.0575;
 
-  var items = [
+
+  function Item(object) {
+    this.id = object.id;
+    this.name = object.name;
+    this.price = object.price;
+    this.quantity = object.quantity;
+    this.discount = object.discount;
+  }
+
+  Item.prototype.fullPriceWithTax = function fullPriceWithTax(rate) {
+    return this.price + (this.price * rate) - this.discount;
+  }
+  Item.prototype.capitalizedName = function capitalizedName() {
+    return this.name[0].toUpperCase() + this.name.substr(1);
+  }
+
+
+  var items = [];
+
+  [
     { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
     { "id": 89274, "name": "golf club", "price": 98, "quantity": 10, "color": "black", "discount": 0 },
     { "id": 64, "name": "iPhone", "price": 499, "quantity": 2, "color": "white", "discount": 0 },
@@ -16,7 +35,9 @@
     { "id": 3292, "name": "enlightenment", "price": 99999, "quantity": 1, "color": "red", "discount": 0 },
     { "id": 533, "name": "eggs", "price": 5, "quantity": 12, "color": "brown", "discount": 1 },
     { "id": 683, "name": "pillow", "price": 27, "quantity": 10, "color": "black", "discount": 12 }
-  ];
+  ].forEach(function(object) {
+    items.push(new Item(object));
+  })
 
   angular
     .module('shopular', [])
@@ -25,7 +46,7 @@
   function InventoryController() {
     this.inventory = items;
     this.tax = salesTax;
-    this.country = england;
+    // this.country = england;
   }
 
 })();
